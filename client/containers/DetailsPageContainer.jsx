@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const DetailsPageContainer = (props) => {
   return <div> DETAILS PAGE</div>;

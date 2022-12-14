@@ -50,14 +50,15 @@ const Sidebar = (props) => {
         activities[item] && activitiesDone.push(item);
       }
       console.log({ parkCode, date, activitiesDone, notes });
-      fetch(`http://localhost:3000/user/${parkCode}`, {
-        method: 'POST',
+      fetch(`http://localhost:3000/user`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'Application/JSON' },
-        body: JSON.stringify({ parkCode, date, activitiesDone, notes }),
+        body: JSON.stringify({ parkCode, dateVisited: date, activitiesDone, notes, username: props.user.username, parksVisited:props.user.parksVisited}),
       })
         .then((res) => res.json())
-        .then(window.location.reload(false))
-        .then((data) => {})
+        .then((data) => {
+          props.setActiveUser(data);
+        })
         .catch((err) => console.log('AddPark fetch POST to api: ERROR: ', err));
     }
   }
