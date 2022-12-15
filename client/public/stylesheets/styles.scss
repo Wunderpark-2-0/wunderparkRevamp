@@ -49,6 +49,26 @@ h1 {
   }
 }
 
+.details-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-Card-Container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-card {
+  background-color: white;
+  border: 1px solid rgba(190, 190, 190, 0.665);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
 .color {
   filter: none;
 }
@@ -70,3 +90,20 @@ h1 {
   overflow: scroll;
   height: 70%;
 }
+
+.detailsIntroCard {
+  background-color: white;
+  width: 90%;
+  height: auto;
+  outline: auto;
+  display: flex;
+}
+
+.detailsIntroCard img {
+  width: 300px;
+  height: auto;
+}
+
+// .detailsIntroCard p {
+//   font-size: 16px;
+// }

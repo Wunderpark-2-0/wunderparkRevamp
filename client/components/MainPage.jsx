@@ -23,7 +23,13 @@ const MainPage = (props) => {
         <div className="float">
           <h1> WÜNDER PARKS</h1>
         </div>
-        {<MainContainer codes={codes} user={props.user} />}
+        {
+          <MainContainer
+            codes={codes}
+            user={props.user}
+            setCurrentCode={props.setCurrentCode}
+          />
+        }
       </div>
     </div>
   );
