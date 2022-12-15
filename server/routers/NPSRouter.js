@@ -20,16 +20,16 @@ NPSRouter.get(
   '/modalInfo/:parkcode',
   NPSController.getPark,
   NPSController.getModalInfo,
-  (_req, res) => {
-    return res.status(200).json({
-      campground: res.locals.campgrounds,
-      amenities: res.locals.amenities,
-      // weather: res.locals.weather,
-    });
-  }
   // (_req, res) => {
-  //   return res.status(200).json(res.locals.modalInfo);
+  //   return res.status(200).json({
+  //     campground: res.locals.campgrounds,
+  //     amenities: res.locals.amenities,
+  //     // weather: res.locals.weather,
+  //   });
   // }
+  (_req, res) => {
+    return res.status(200).json(res.locals.modalInfo);
+  }
 );
 
 NPSRouter.get(

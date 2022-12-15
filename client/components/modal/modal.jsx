@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import stateObj from '../../public/states.js';
+import { useNavigate } from 'react-router-dom';
 
 const Modal = (props) => {
   if (!props.show) {
     return null;
   }
-  console.log("information", props.user.parksVisited[props.parkCode])
+  const navigate = useNavigate();
+  props.setCurrentCode(props.parkCode);
+  console.log('information', props.user.parksVisited[props.parkCode]);
   // declare userData using hooks
   // const [userData, setUserData] = useState({});
   const [npsData, setNpsData] = useState([]);
@@ -26,20 +29,26 @@ const Modal = (props) => {
         console.log('data from NPS get request: ', data);
       })
       .catch((err) => console.log('error fetching NPS data', err));
-    }, []);
-    
-    // iterate over activities completed in park activities
-    function parksActivitiesExist() {
-      // declare parkActivities array, initialized to strongpty arr
-      const parkActivitiesList = [];
-      if (props.user.parksVisited[props.parkCode].activitiesDone) {
-        for (let i = 0; i < props.user.parksVisited[props.parkCode].activitiesDone.length; i++) {
-          // create list items for each of these activities
-          // push to parkActivities arr
-          parkActivitiesList.push(<li>{props.user.parksVisited[props.parkCode].activitiesDone[i]}</li>);
-        }
-        return (
-          <p className="park_activities">
+  }, []);
+
+  // iterate over activities completed in park activities
+  function parksActivitiesExist() {
+    // declare parkActivities array, initialized to strongpty arr
+    const parkActivitiesList = [];
+    if (props.user.parksVisited[props.parkCode].activitiesDone) {
+      for (
+        let i = 0;
+        i < props.user.parksVisited[props.parkCode].activitiesDone.length;
+        i++
+      ) {
+        // create list items for each of these activities
+        // push to parkActivities arr
+        parkActivitiesList.push(
+          <li>{props.user.parksVisited[props.parkCode].activitiesDone[i]}</li>
+        );
+      }
+      return (
+        <p className="park_activities">
           <span className="label">Activities Completed: </span>
           <ul>{parkActivitiesList}</ul>
         </p>
@@ -48,10 +57,10 @@ const Modal = (props) => {
       return null;
     }
   }
-  
+
   // declare a function that checks if userData is null
   function userDataExists() {
-    if(!(props.user.parksVisited[props.parkCode])){
+    if (!props.user.parksVisited[props.parkCode]) {
       return;
     }
     // console.log('npsData inside userDataExists :', props.user);
@@ -77,7 +86,7 @@ const Modal = (props) => {
       );
     } else return null;
   }
-  
+
   function npsDataComponent() {
     return (
       <div className="api_data">
@@ -89,7 +98,7 @@ const Modal = (props) => {
   }
   // this is where we put the div for userdata
   // if null, return null
-  
+
   return (
     <div className={`modal ${props.className}`} onClick={props.onClose}>
       <div className="content" onClick={(e) => e.stopPropagation()}>
@@ -111,6 +120,14 @@ const Modal = (props) => {
       </div>
       <div className="footer">
         <a className="copywrite">WÜNDERPARK ©</a>
+        <button
+          type="button"
+          onClick={() => {
+            navigate('/details');
+          }}
+        >
+          MORE DETAILS
+        </button>
       </div>
     </div>
   );

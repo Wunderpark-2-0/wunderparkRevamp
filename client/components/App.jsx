@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 const App = (props) => {
   const [activeUser, setActiveUser] = useState({});
   const [isLoggingIn, setIsLoggingIn] = useState(true);
+  const [currentCode, setCurrentCode] = useState('');
 
   const onLoginHandler = (user) => {
     setActiveUser(user);
@@ -24,8 +25,20 @@ const App = (props) => {
           />
         }
       />
-      <Route path="/main" element={<HomePageContainer user={activeUser} setActiveUser={setActiveUser}/>} />
-      <Route path="/details" element={<DetailsPageContainer />} />
+      <Route
+        path="/main"
+        element={
+          <HomePageContainer
+            user={activeUser}
+            setActiveUser={setActiveUser}
+            setCurrentCode={setCurrentCode}
+          />
+        }
+      />
+      <Route
+        path="/details"
+        element={<DetailsPageContainer currentCode={currentCode} />}
+      />
     </Routes>
   );
 };
