@@ -5,7 +5,7 @@ import ParkTally from "../components/ParkTally.jsx";
 const SidebarContainer = (props) => {
   return (
     <div className="sidebarContainer">
-      <Form codes={props.codes} />
+      <Form codes={props.codes} user={props.user} setActiveUser={props.setActiveUser}/>
       <ParkTally codes={props.codes} />
     </div>
   );
