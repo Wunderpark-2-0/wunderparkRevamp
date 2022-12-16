@@ -55,6 +55,7 @@ h3 {
         background-color: rgb(62, 82, 69);
         color: white;
         align-self: flex-start;
+        cursor: pointer;
       }
     }
 
@@ -105,11 +106,16 @@ h3 {
       }
     }
 
+    // .moreDetailsButton {
+    //   margin-left: 50px;
+    // }
+
     .push,
     .footer {
       height: 40px;
       display: flex;
-      justify-content: right;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
 }

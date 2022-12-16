@@ -62,6 +62,7 @@ NPSController.getModalInfo = async (req, res, next) => {
     //   `https://developer.nps.gov/api/v1/webcams?parkCode=${parkCode}&api_key=${API_KEY}`
     // );
     const modalInfo = {
+      title: park.fullName,
       description: park.description,
       latLong: park.latLong,
       latitude: park.latitude,
@@ -140,66 +141,66 @@ NPSController.getWeather = async (req, res, next) => {
     const { latitude, longitude } = res.locals.modalInfo;
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${latitude}%2C%20${longitude}?unitGroup=us&include=days%2Ccurrent&key=HZV9FC29JZBT8PBRUNYN8FTHW&contentType=json`;
     const weather = await axios.get(url);
-    // const weatherInfo = [];
-    // for (let i = 0; i < 7; i++) {
-    //   const currDay = weather.data.days[i];
-    //   weatherInfo.push({
-    //     date: currDay.datetime,
-    //     tempmax: currDay.tempmax,
-    //     tempmin: currDay.tempmin,
-    //     description: currDay.description,
-    //   });
-    // }
-    // res.locals.weather = weatherInfo;
+    const weatherInfo = [];
+    for (let i = 0; i < 7; i++) {
+      const currDay = weather.data.days[i];
+      weatherInfo.push({
+        date: currDay.datetime,
+        tempmax: currDay.tempmax,
+        tempmin: currDay.tempmin,
+        description: currDay.description,
+      });
+    }
+    res.locals.weather = weatherInfo;
 
     //hardcoded dummy weather data - due to api limit, above code works
-    res.locals.weather = [
-      {
-        date: '2022-12-14',
-        tempmax: 40.9,
-        tempmin: 16.1,
-        description: 'Partly cloudy throughout the day.',
-      },
-      {
-        date: '2022-12-15',
-        tempmax: 38.9,
-        tempmin: 31,
-        description: 'Partly cloudy throughout the day.',
-      },
-      {
-        date: '2022-12-16',
-        tempmax: 36,
-        tempmin: 32.6,
-        description:
-          'Cloudy skies throughout the day with a chance of rain or snow.',
-      },
-      {
-        date: '2022-12-17',
-        tempmax: 36,
-        tempmin: 33,
-        description:
-          'Cloudy skies throughout the day with a chance of rain or snow throughout the day.',
-      },
-      {
-        date: '2022-12-18',
-        tempmax: 34.2,
-        tempmin: 30.6,
-        description:
-          'Cloudy skies throughout the day with early morning snow or rain.',
-      },
-      {
-        date: '2022-12-19',
-        tempmax: 34.1,
-        tempmin: 27.8,
-        description: 'Partly cloudy throughout the day.',
-      },
-      {
-        date: '2022-12-20',
-        tempmax: 29,
-        tempmin: 19.2,
-        description: 'Clearing in the afternoon.',
-      },
-    ];
+    // res.locals.weather = [
+    //   {
+    //     date: '2022-12-14',
+    //     tempmax: 40.9,
+    //     tempmin: 16.1,
+    //     description: 'Partly cloudy throughout the day.',
+    //   },
+    //   {
+    //     date: '2022-12-15',
+    //     tempmax: 38.9,
+    //     tempmin: 31,
+    //     description: 'Partly cloudy throughout the day.',
+    //   },
+    //   {
+    //     date: '2022-12-16',
+    //     tempmax: 36,
+    //     tempmin: 32.6,
+    //     description:
+    //       'Cloudy skies throughout the day with a chance of rain or snow.',
+    //   },
+    //   {
+    //     date: '2022-12-17',
+    //     tempmax: 36,
+    //     tempmin: 33,
+    //     description:
+    //       'Cloudy skies throughout the day with a chance of rain or snow throughout the day.',
+    //   },
+    //   {
+    //     date: '2022-12-18',
+    //     tempmax: 34.2,
+    //     tempmin: 30.6,
+    //     description:
+    //       'Cloudy skies throughout the day with early morning snow or rain.',
+    //   },
+    //   {
+    //     date: '2022-12-19',
+    //     tempmax: 34.1,
+    //     tempmin: 27.8,
+    //     description: 'Partly cloudy throughout the day.',
+    //   },
+    //   {
+    //     date: '2022-12-20',
+    //     tempmax: 29,
+    //     tempmin: 19.2,
+    //     description: 'Clearing in the afternoon.',
+    //   },
+    // ];
     return next();
   } catch (err) {
     next({

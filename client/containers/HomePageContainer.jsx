@@ -7,11 +7,23 @@ const HomePageContainer = (props) => {
   const navigate = useNavigate();
   if (props.user.username) {
     return (
-      <MainPage
-        user={props.user}
-        setActiveUser={props.setActiveUser}
-        setCurrentCode={props.setCurrentCode}
-      ></MainPage>
+      <div>
+        <nav className="navBar">
+          <button
+            type="button"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            Logout
+          </button>
+        </nav>
+        <MainPage
+          user={props.user}
+          setActiveUser={props.setActiveUser}
+          setCurrentCode={props.setCurrentCode}
+        ></MainPage>
+      </div>
     );
   } else {
     useEffect(() => {

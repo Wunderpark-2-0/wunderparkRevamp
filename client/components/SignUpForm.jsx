@@ -29,21 +29,17 @@ const SignUpForm = (props) => {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={() => {
-          console.log('Sign Up Form Submitted');
-        }}
-      >
-        <label htmlFor="username">
+    <div className="formCard">
+      <form onSubmit={onSignUpSubmitHandler} className="registrationForm">
+        <label htmlFor="username" className="registrationFormLabel">
           Username:
           <input name="username" type="text" placeholder="Choose Username" />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className="registrationFormLabel">
           Password:
           <input name="password" type="text" placeholder="Choose Password" />
         </label>
-        <label htmlFor="confirmPass">
+        <label htmlFor="confirmPass" className="registrationFormLabel">
           Confirm Password:
           <input
             name="confirmPass"
@@ -51,7 +47,9 @@ const SignUpForm = (props) => {
             placeholder="Confirm Password"
           />
         </label>
-        <button type="submit">REGISTER</button>
+        <button type="submit" className="registrationFormButton">
+          REGISTER
+        </button>
       </form>
     </div>
   );

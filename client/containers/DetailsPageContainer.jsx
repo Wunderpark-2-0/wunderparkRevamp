@@ -26,7 +26,7 @@ const DetailsPageContainer = (props) => {
 
   return (
     <div className="details-page">
-      <nav>
+      <nav className="navBar">
         <button
           type="button"
           onClick={() => {

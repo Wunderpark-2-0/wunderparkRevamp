@@ -107,6 +107,15 @@ const Modal = (props) => {
             {props.parkName + ' National Park '} <br />
             <small className="state">{stateObj[npsData.states]}</small>
           </h3>
+          <button
+            className="close"
+            type="button"
+            onClick={() => {
+              navigate('/details');
+            }}
+          >
+            Plan a Trip
+          </button>
           <button className="close" onClick={props.onClose}>
             Close
           </button>
@@ -120,14 +129,6 @@ const Modal = (props) => {
       </div>
       <div className="footer">
         <a className="copywrite">WÜNDERPARK ©</a>
-        <button
-          type="button"
-          onClick={() => {
-            navigate('/details');
-          }}
-        >
-          MORE DETAILS
-        </button>
       </div>
     </div>
   );

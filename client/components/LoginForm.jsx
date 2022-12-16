@@ -30,17 +30,19 @@ const LoginForm = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={onLoginSubmitHandler}>
-        <label htmlFor="username">
+    <div className="formCard">
+      <form onSubmit={onLoginSubmitHandler} className="registrationForm">
+        <label htmlFor="username" className="registrationFormLabel">
           Username:
           <input name="username" type="text" placeholder="Username"></input>
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className="registrationFormLabel">
           Password:
           <input name="password" type="text" placeholder="Password"></input>
         </label>
-        <button type="submit">LOGIN</button>
+        <button type="submit" className="registrationFormButton">
+          LOGIN
+        </button>
       </form>
     </div>
   );
