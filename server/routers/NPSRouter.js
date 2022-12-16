@@ -11,17 +11,41 @@ NPSRouter.get('/parks', NPSController.getParkCodes, (_req, res) => {
 
 // THIS ONE WORKS FINE
 //given a specific park code, this will make a fetch request to the nps parks api and get all the details on that specific park and send it back to the client.
-NPSRouter.get('/parks/:parkCode', NPSController.getPark, (_req, res) => {
+NPSRouter.get('/parks/:parkcode', NPSController.getPark, (_req, res) => {
   return res.status(200).send(res.locals.parkData);
 });
 
 //given a park code, get the park data, then refine the park data for only the modal information. This is the get request that is made when a modal is clicked.
 NPSRouter.get(
-  '/modalInfo/:parkCode',
+  '/modalInfo/:parkcode',
   NPSController.getPark,
   NPSController.getModalInfo,
+  // (_req, res) => {
+  //   return res.status(200).json({
+  //     campground: res.locals.campgrounds,
+  //     amenities: res.locals.amenities,
+  //     // weather: res.locals.weather,
+  //   });
+  // }
   (_req, res) => {
     return res.status(200).json(res.locals.modalInfo);
+  }
+);
+
+NPSRouter.get(
+  '/details/:parkcode',
+  NPSController.getPark,
+  NPSController.getModalInfo,
+  NPSController.getCampgrounds,
+  NPSController.getParkAmenities,
+  NPSController.getWeather,
+  (_req, res) => {
+    return res.status(200).json({
+      campground: res.locals.campgrounds,
+      amenities: res.locals.amenities,
+      weather: res.locals.weather,
+      modalDetails: res.locals.modalInfo,
+    });
   }
 );
 

@@ -5,10 +5,9 @@ const userController = {};
 
 //createUser
 userController.createUser = async (req, res, next) => {
-  const { username, password, parksVisited } = req.body;
-
+  const { username, password } = req.body;
+  const parksVisited = {};
   User.create({ username, password, parksVisited }, (err, user) => {
-
     if (err) {
       console.log(err);
       return next({
@@ -21,37 +20,37 @@ userController.createUser = async (req, res, next) => {
     res.locals.user = user;
     return next();
   });
-}
+};
 
 //verifyUser
 userController.verifyUser = async (req, res, next) => {
-  const {username, password} = req.body;
+  const { username, password } = req.body;
   try {
-    
-    const user = await User.find({ username }).exec()
+    const user = await User.find({ username }).exec();
     //check if user found
     //if user not found in data base by username
-    if(!user[0]) {
-      res.locals.needSignUp = true
+    if (!user[0]) {
+      res.locals.needSignUp = true;
       return next();
-    };
+    }
     //checking if the passwords are a match with bcrypt compare
-    const match = await bcrypt.compare(password, user[0].password)
-    if (!match) {res.locals.needSignUp = true;}
-    else res.locals.user = user[0];
-    
+    const match = await bcrypt.compare(password, user[0].password);
+    if (!match) {
+      res.locals.needSignUp = true;
+    } else res.locals.user = user[0];
+
     return next();
   } catch (err) {
     return next({
-        log: "Error in createUser",
-        message: { err },
-    })
+      log: 'Error in createUser',
+      message: { err },
+    });
   }
-}
+};
 
 //updateUser - req.body = {username: , notes: , dateVisited: , activitiesCompleted}
 userController.updateUserParksVisited = (req, res, next) => {
-  console.log("request body", req.body)
+  console.log('request body', req.body);
   const {
     username,
     parkCode,
@@ -60,11 +59,11 @@ userController.updateUserParksVisited = (req, res, next) => {
     activitiesDone,
     parksVisited,
   } = req.body;
-console.log('username:',username)
+  console.log('username:', username);
   User.findOneAndUpdate(
     { username },
     {
-     parksVisited: {
+      parksVisited: {
         ...parksVisited,
         [parkCode]: { notes, dateVisited, activitiesDone },
       },
@@ -74,19 +73,17 @@ console.log('username:',username)
     }
   )
     .then((updatedUser) => {
-      console.log("updatedUser", updatedUser);
+      console.log('updatedUser', updatedUser);
       res.locals.updatedUser = updatedUser;
       return next();
     })
     .catch((err) => {
       return next({
-        log: "Error in updateUserParksVisited",
+        log: 'Error in updateUserParksVisited',
         message: { err },
       });
     });
 };
-
-
 
 // // Create a new user in the database - this is invoked on a post request to /user
 

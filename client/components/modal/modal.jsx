@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import stateObj from '../../public/states.js';
+import { useNavigate } from 'react-router-dom';
 
 const Modal = (props) => {
   if (!props.show) {
     return null;
   }
-
+  const navigate = useNavigate();
+  props.setCurrentCode(props.parkCode);
+  console.log('information', props.user.parksVisited[props.parkCode]);
   // declare userData using hooks
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
   const [npsData, setNpsData] = useState([]);
 
-  const testData = {
-    date: '12/10/22',
-    rating: 5,
-    parkActivities: ['Biking', 'Camping', 'Fishing', 'Hiking', 'Swimming'],
-  };
+  // const testData = {
+  //   date: '12/10/22',
+  //   rating: 5,
+  //   parkActivities: ['Biking', 'Camping', 'Fishing', 'Hiking', 'Swimming'],
+  // };
 
   // send fetch request to DB to get user info
   useEffect(() => {
@@ -26,26 +29,23 @@ const Modal = (props) => {
         console.log('data from NPS get request: ', data);
       })
       .catch((err) => console.log('error fetching NPS data', err));
-
-    fetch(`http://localhost:3000/user/${props.parkCode}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log('data in the modal is: ', data);
-        setUserData(data);
-        // console.log('user data: ', data);
-      })
-      .catch((err) => console.log('error getting user data', err));
   }, []);
 
   // iterate over activities completed in park activities
   function parksActivitiesExist() {
     // declare parkActivities array, initialized to strongpty arr
     const parkActivitiesList = [];
-    if (userData.activitiesCompleted) {
-      for (let i = 0; i < userData.activitiesCompleted.length; i++) {
+    if (props.user.parksVisited[props.parkCode].activitiesDone) {
+      for (
+        let i = 0;
+        i < props.user.parksVisited[props.parkCode].activitiesDone.length;
+        i++
+      ) {
         // create list items for each of these activities
         // push to parkActivities arr
-        parkActivitiesList.push(<li>{userData.activitiesCompleted[i]}</li>);
+        parkActivitiesList.push(
+          <li>{props.user.parksVisited[props.parkCode].activitiesDone[i]}</li>
+        );
       }
       return (
         <p className="park_activities">
@@ -60,8 +60,11 @@ const Modal = (props) => {
 
   // declare a function that checks if userData is null
   function userDataExists() {
-    console.log('npsData inside userDataExists :', npsData);
-    if (userData.date) {
+    if (!props.user.parksVisited[props.parkCode]) {
+      return;
+    }
+    // console.log('npsData inside userDataExists :', props.user);
+    if (props.user.parksVisited[props.parkCode].dateVisited) {
       return (
         <div className="user_info">
           {/* <h4>User Log</h4> */}
@@ -70,12 +73,12 @@ const Modal = (props) => {
             <p className="date_visited">
               <span className="label">Date Visited: </span>
               <br />
-              {userData.date}
+              {props.user.parksVisited[props.parkCode].dateVisited}
             </p>
             <p className="user_notes">
               <span className="label">Notes: </span>
               <br />
-              {userData.notes}
+              {props.user.parksVisited[props.parkCode].notes}
             </p>
           </div>
           {parksActivitiesExist()}
@@ -104,6 +107,15 @@ const Modal = (props) => {
             {props.parkName + ' National Park '} <br />
             <small className="state">{stateObj[npsData.states]}</small>
           </h3>
+          <button
+            className="close"
+            type="button"
+            onClick={() => {
+              navigate('/details');
+            }}
+          >
+            Plan a Trip
+          </button>
           <button className="close" onClick={props.onClose}>
             Close
           </button>
@@ -123,3 +135,12 @@ const Modal = (props) => {
 };
 
 export default Modal;
+
+// fetch(`http://localhost:3000/user/${props.parkCode}`)
+//   .then((res) => res.json())
+//   .then((data) => {
+//     // console.log('data in the modal is: ', data);
+//     setUserData(data);
+//     // console.log('user data: ', data);
+//   })
+//   .catch((err) => console.log('error getting user data', err));

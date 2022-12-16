@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import IconMaker from "../components/IconMaker.jsx";
-import BasicExample from "../components/ProgressBar.jsx";
+import React, { useState, useEffect } from 'react';
+import IconMaker from '../components/IconMaker.jsx';
+import BasicExample from '../components/ProgressBar.jsx';
 
 // declare MainContainer function
 const MainContainer = (props) => {
@@ -8,7 +8,11 @@ const MainContainer = (props) => {
   // return out the HTML elements
   return (
     <div className="main" id="mainContainer">
-      <IconMaker codes={props.codes} />
+      <IconMaker
+        codes={props.codes}
+        user={props.user}
+        setCurrentCode={props.setCurrentCode}
+      />
     </div>
   );
 };

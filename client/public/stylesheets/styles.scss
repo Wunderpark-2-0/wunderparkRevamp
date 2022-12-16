@@ -49,12 +49,42 @@ h1 {
   }
 }
 
+.details-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-Card-Container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 95vw;
+}
+
+.details-card {
+  // background-color: rgba(192, 100, 8, 0.618);
+  background-image: url('https://t4.ftcdn.net/jpg/02/82/18/79/360_F_282187946_WwV8GHXwGB9x5j6OqEoMG6emNIMUBDxY.jpg');
+  background-color: rgba(255, 255, 255, 0.195);
+  border-radius: 5px;
+  border: 1px solid rgba(190, 190, 190, 0.665);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 25vw;
+  height: 600px;
+  margin: 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .color {
   filter: none;
 }
 
 .main {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .container {
@@ -67,6 +97,175 @@ h1 {
   gap: 16px;
   margin: 0 auto;
   padding: 20px 50px;
-  overflow: scroll;
+  overflow: auto;
   height: 70%;
+}
+
+.detailsIntroCard {
+  // background-color: rgba(192, 100, 8, 0.618);
+  background-image: url('https://t4.ftcdn.net/jpg/02/82/18/79/360_F_282187946_WwV8GHXwGB9x5j6OqEoMG6emNIMUBDxY.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  margin-left: 50px;
+  width: 90%;
+  height: auto;
+  display: flex;
+  color: black;
+  h1 {
+    color: black;
+  }
+}
+
+.detailsIntroCard img {
+  width: 300px;
+  height: auto;
+}
+
+.descriptionSection {
+  padding: 25px;
+  color: black;
+}
+
+.formCard {
+  // background-color: rgb(181, 117, 35);
+  background-image: url('https://i.pinimg.com/originals/3c/65/bf/3c65bfb6fbaa8cf4c7ee8c262fc6ee90.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  // outline: auto;
+  border-radius: 5px;
+  width: 100vw;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registrationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+}
+
+.registrationFormLabel {
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.registrationFormLabel input {
+  border-radius: 8px;
+  margin-left: 6px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.registrationFormButton {
+  padding: 10px 20px;
+  height: 40px;
+  width: 120px;
+  margin: 20px;
+  margin-left: 70px;
+  border: 1px solid rgb(43, 56, 48);
+  background-color: rgb(62, 82, 69);
+  border-radius: 8px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+}
+
+.registrationFormButton:hover,
+.registrationFormButton:active {
+  background: rgba(71, 93, 80, 0.691);
+  border-color: rgba(71, 93, 80, 0.691);
+}
+
+.registrationFormButton:focus {
+  outline: none;
+}
+
+.navBar {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navBar h1 {
+  font-size: 40px;
+  margin-left: 40vw;
+}
+
+.navBar button {
+  height: 40px;
+  width: 120px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  background-image: url('https://i.pinimg.com/originals/3c/65/bf/3c65bfb6fbaa8cf4c7ee8c262fc6ee90.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+// .detailsIntroCard p {
+//   font-size: 16px;
+// }
+
+.campgrounds {
+  display: flex;
+  flex-direction: column;
+}
+
+.campgroundsH2 {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+.campgroundsUL {
+  list-style-type: none;
+  width: 80%;
+  margin-right: 20px;
+}
+.campgroundsLI {
+  border: 1px solid rgba(43, 56, 48, 0.265);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 7px;
+  padding: 10px;
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ul {
+    list-style-type: none;
+    li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.1rem;
+      width: 95%;
+    }
+  }
+}
+
+.amenities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ul {
+    list-style-type: none;
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.underline {
+  text-decoration: underline;
 }
